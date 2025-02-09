@@ -41,6 +41,7 @@ void Robot::RobotInit() {
  * - "FRDrive Encoder": Front-right wheel drive encoder distance.
  * - "BLDrive Encoder": Rear-left wheel drive encoder distance.
  * - "BRDrive Encoder": Rear-right wheel drive encoder distance.
+ * 
  */
 void Robot::RobotPeriodic() {
 
@@ -75,6 +76,16 @@ void Robot::DisabledPeriodic() {}
 /**
  * This autonomous runs the autonomous command selected by your {@link
  * RobotContainer} class.
+ * 
+ * Schedules the autonomous command if it has been set.
+ *
+
+ *
+ * - `m_autonomousCommand`: A pointer to the autonomous command.
+ * - `Schedule()`: Adds the command to the `CommandScheduler` for execution.
+ *
+ * This ensures that the pre-defined autonomous sequence starts running 
+ * when the autonomous period begins.
  */
 void Robot::AutonomousInit() {
   //m_container.m_arm.CalibrateEncoderValue();
@@ -84,8 +95,8 @@ void Robot::AutonomousInit() {
   
   m_autonomousCommand = m_container.getAutonomousCommand();
 
-  if (m_autonomousCommand) {
-    m_autonomousCommand->Schedule();
+  if (m_autonomousCommand) {                      //This code checks if `m_autonomousCommand` is not null and, if valid, 
+    m_autonomousCommand->Schedule();               //schedules it to run during the autonomous period.
   }
 }
 
